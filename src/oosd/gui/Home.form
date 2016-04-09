@@ -114,12 +114,12 @@
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="264" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="jButton1" max="32767" attributes="0"/>
-                          <Component id="jButton2" pref="266" max="32767" attributes="0"/>
-                          <Component id="jButton3" max="32767" attributes="0"/>
-                          <Component id="jButton4" max="32767" attributes="0"/>
-                          <Component id="jButton5" max="32767" attributes="0"/>
-                          <Component id="jButton6" max="32767" attributes="0"/>
+                          <Component id="AddCus" max="32767" attributes="0"/>
+                          <Component id="ShowCus" pref="266" max="32767" attributes="0"/>
+                          <Component id="ShowRoom" max="32767" attributes="0"/>
+                          <Component id="ShowRest" max="32767" attributes="0"/>
+                          <Component id="EditPro" max="32767" attributes="0"/>
+                          <Component id="LogOut" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace max="32767" attributes="0"/>
                   </Group>
@@ -129,49 +129,49 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jButton1" min="-2" max="-2" attributes="0"/>
+                      <Component id="AddCus" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="jButton2" min="-2" max="-2" attributes="0"/>
+                      <Component id="ShowCus" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="jButton3" min="-2" max="-2" attributes="0"/>
+                      <Component id="ShowRoom" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="jButton4" min="-2" max="-2" attributes="0"/>
+                      <Component id="ShowRest" min="-2" max="-2" attributes="0"/>
                       <EmptySpace pref="193" max="32767" attributes="0"/>
-                      <Component id="jButton5" min="-2" max="-2" attributes="0"/>
+                      <Component id="EditPro" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Component id="jButton6" min="-2" max="-2" attributes="0"/>
+                      <Component id="LogOut" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
           </Layout>
           <SubComponents>
-            <Component class="javax.swing.JButton" name="jButton1">
+            <Component class="javax.swing.JButton" name="AddCus">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Add new Customer"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JButton" name="jButton2">
+            <Component class="javax.swing.JButton" name="ShowCus">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Show customer detail"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JButton" name="jButton3">
+            <Component class="javax.swing.JButton" name="ShowRoom">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Show room detail"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JButton" name="jButton4">
+            <Component class="javax.swing.JButton" name="ShowRest">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Show rest detail"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JButton" name="jButton5">
+            <Component class="javax.swing.JButton" name="EditPro">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Edit Profile"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JButton" name="jButton6">
+            <Component class="javax.swing.JButton" name="LogOut">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Log Out"/>
               </Properties>
