@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 package oosd.gui;
-
+import oosd.project.*;
 /**
  *
  * @author USER
@@ -37,7 +37,6 @@ public class SignIn extends javax.swing.JFrame {
         jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(800, 600));
         setSize(new java.awt.Dimension(800, 600));
 
         jPanel1.setBackground(new java.awt.Color(255, 153, 0));
@@ -52,8 +51,6 @@ public class SignIn extends javax.swing.JFrame {
         jLabel2.setText("PASSWORD :");
 
         jTextField1.setFont(new java.awt.Font("Segoe UI Emoji", 0, 18)); // NOI18N
-
-        jPasswordField1.setText("jPasswordField1");
 
         jButton1.setBackground(new java.awt.Color(255, 153, 51));
         jButton1.setFont(new java.awt.Font("Levenim MT", 1, 14)); // NOI18N
