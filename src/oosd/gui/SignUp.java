@@ -120,8 +120,10 @@ public class SignUp extends javax.swing.JFrame {
         txtAdd.setRows(5);
         jScrollPane1.setViewportView(txtAdd);
 
+        Confirm.setBackground(new java.awt.Color(255, 153, 51));
         Confirm.setText("Confirm");
 
+        Cancel.setBackground(new java.awt.Color(255, 153, 51));
         Cancel.setText("Cancel");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);

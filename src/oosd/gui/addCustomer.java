@@ -106,8 +106,10 @@ public class addCustomer extends javax.swing.JFrame {
         txtAddress.setRows(5);
         jScrollPane1.setViewportView(txtAddress);
 
+        confirm.setBackground(new java.awt.Color(255, 153, 51));
         confirm.setText("Confirm");
 
+        Cancel.setBackground(new java.awt.Color(255, 153, 51));
         Cancel.setText("Cancel");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
@@ -172,9 +174,9 @@ public class addCustomer extends javax.swing.JFrame {
                     .addComponent(Address)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(confirm)
-                    .addComponent(Cancel))
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(Cancel)
+                    .addComponent(confirm))
                 .addContainerGap(72, Short.MAX_VALUE))
         );
 

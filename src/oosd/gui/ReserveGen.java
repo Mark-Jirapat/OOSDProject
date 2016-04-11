@@ -112,8 +112,10 @@ public class ReserveGen extends javax.swing.JFrame {
 
         endY.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "2016", "2017", "2018", "2019", "2020", "2021", "2022", "2023", "2024", "2025", "2026" }));
 
+        Next.setBackground(new java.awt.Color(255, 153, 51));
         Next.setText("NEXT");
 
+        Cancel.setBackground(new java.awt.Color(255, 153, 51));
         Cancel.setText("Cancel");
 
         Day.setText("DAY");
