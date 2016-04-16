@@ -11,10 +11,14 @@ package oosd.gui;
  */
 public class Home extends javax.swing.JPanel {
 
+    Frame frame;
+    
     public Home(Frame frame) {
         initComponents();
         setBounds(0, 0, 800, 600);
         add(new Header("Home"));
+        this.frame = frame;
+        
     }
 
     /**
@@ -37,6 +41,7 @@ public class Home extends javax.swing.JPanel {
         setBackground(new java.awt.Color(255, 204, 0));
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.setPreferredSize(new java.awt.Dimension(800, 432));
 
         addCustomer.setFont(new java.awt.Font("Tw Cen MT Condensed Extra Bold", 0, 18)); // NOI18N
         addCustomer.setText("Add New Customer");
@@ -55,6 +60,11 @@ public class Home extends javax.swing.JPanel {
 
         logOut.setFont(new java.awt.Font("Tw Cen MT Condensed Extra Bold", 0, 18)); // NOI18N
         logOut.setText("Log Out");
+        logOut.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                logOutActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -82,7 +92,7 @@ public class Home extends javax.swing.JPanel {
                 .addComponent(showRoom)
                 .addGap(18, 18, 18)
                 .addComponent(showRest)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 146, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 134, Short.MAX_VALUE)
                 .addComponent(Edit)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(logOut)
@@ -98,11 +108,15 @@ public class Home extends javax.swing.JPanel {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(143, Short.MAX_VALUE)
+                .addContainerGap(141, Short.MAX_VALUE)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addGap(27, 27, 27))
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void logOutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logOutActionPerformed
+        frame.setCurrent(new SignIn(frame));
+    }//GEN-LAST:event_logOutActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

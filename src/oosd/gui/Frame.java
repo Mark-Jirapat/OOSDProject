@@ -17,14 +17,15 @@ public class Frame extends JFrame {
         return current;
     }
 
-    public void setCurrent(JPanel current) {
+    public void setCurrent(JPanel Npanel) {
         remove(current);
-        
-        this.current = current;
-        add(current);
         revalidate();
         repaint();
         
+        current = Npanel;
+        add(current);
+        revalidate();
+        repaint();
     }
 
     @SuppressWarnings("unchecked")
@@ -33,7 +34,7 @@ public class Frame extends JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Reservation Hotel");
-        setPreferredSize(new java.awt.Dimension(800, 600));
+        setPreferredSize(new java.awt.Dimension(800, 615));
         setResizable(false);
         setSize(new java.awt.Dimension(800, 600));
 
@@ -75,7 +76,7 @@ public class Frame extends JFrame {
         }
         //</editor-fold>
         //</editor-fold>
-
+      
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new Frame().setVisible(true);

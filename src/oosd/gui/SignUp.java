@@ -11,6 +11,7 @@ package oosd.gui;
  */
 public class SignUp extends javax.swing.JPanel {
 
+    Frame frame;
     /**
      * Creates new form SignUp
      */
@@ -18,6 +19,7 @@ public class SignUp extends javax.swing.JPanel {
         initComponents();
         setBounds(0, 0, 800, 600);
         add(new Header("Register"));
+        this.frame = frame;
     }
 
     /**
@@ -100,6 +102,11 @@ public class SignUp extends javax.swing.JPanel {
         Cancel.setBackground(new java.awt.Color(255, 51, 51));
         Cancel.setForeground(new java.awt.Color(255, 255, 255));
         Cancel.setText("Cancel");
+        Cancel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CancelActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -183,7 +190,7 @@ public class SignUp extends javax.swing.JPanel {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Confirm)
                     .addComponent(Cancel))
-                .addContainerGap(25, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -197,9 +204,13 @@ public class SignUp extends javax.swing.JPanel {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(143, Short.MAX_VALUE)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addGap(25, 25, 25))
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void CancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CancelActionPerformed
+        frame.setCurrent(new SignIn(frame));
+    }//GEN-LAST:event_CancelActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
