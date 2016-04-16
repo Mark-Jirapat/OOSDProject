@@ -14,8 +14,10 @@ public class SignUp extends javax.swing.JPanel {
     /**
      * Creates new form SignUp
      */
-    public SignUp() {
+    public SignUp(Frame frame) {
         initComponents();
+        setBounds(0, 0, 800, 600);
+        add(new Header("Register"));
     }
 
     /**

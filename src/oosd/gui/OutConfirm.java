@@ -11,11 +11,10 @@ package oosd.gui;
  */
 public class OutConfirm extends javax.swing.JPanel {
 
-    /**
-     * Creates new form ReserveConfirm
-     */
-    public OutConfirm() {
+    public OutConfirm(Frame frame) {
         initComponents();
+        setBounds(0, 0, 800, 600);
+        add(new Header("Check-Out : Confirmation"));
     }
 
     /**

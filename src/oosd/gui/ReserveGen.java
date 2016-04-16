@@ -11,11 +11,10 @@ package oosd.gui;
  */
 public class ReserveGen extends javax.swing.JPanel {
 
-    /**
-     * Creates new form ReserveGen
-     */
-    public ReserveGen() {
+    public ReserveGen(Frame frame) {
         initComponents();
+        setBounds(0, 0, 800, 600);
+        add(new Header("Reservation : General Detail"));
     }
 
     /**

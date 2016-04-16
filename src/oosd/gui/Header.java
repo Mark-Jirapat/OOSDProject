@@ -4,20 +4,27 @@
  * and open the template in the editor.
  */
 package oosd.gui;
-
+import javax.swing.JLabel;
+import javax.swing.JPanel;
 /**
  *
  * @author USER
  */
 public class Header extends javax.swing.JPanel {
 
-    /**
-     * Creates new form Header
-     */
     public Header() {
+        this("default");
+    }
+    
+    public Header(String text) {
         initComponents();
+        setBounds(0, 50, 800, 50);
+        getjLabel1().setText("      " + text);
     }
 
+    public JLabel getjLabel1() {
+        return jLabel1;
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

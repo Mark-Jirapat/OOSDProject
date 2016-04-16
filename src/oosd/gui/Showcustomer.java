@@ -11,11 +11,10 @@ package oosd.gui;
  */
 public class Showcustomer extends javax.swing.JPanel {
 
-    /**
-     * Creates new form Showcustomer
-     */
-    public Showcustomer() {
+    public Showcustomer(Frame frame) {
         initComponents();
+        setBounds(0, 0, 800, 600);
+        add(new Header("Show Customer"));
     }
 
     /**

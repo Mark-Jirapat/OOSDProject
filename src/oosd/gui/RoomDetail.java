@@ -11,11 +11,10 @@ package oosd.gui;
  */
 public class RoomDetail extends javax.swing.JPanel {
 
-    /**
-     * Creates new form RoomDetail
-     */
-    public RoomDetail() {
+    public RoomDetail(Frame frame) {
         initComponents();
+        setBounds(0, 0, 800, 600);
+        add(new Header("Room Detail"));
     }
 
     /**

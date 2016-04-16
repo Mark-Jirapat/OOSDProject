@@ -11,11 +11,10 @@ package oosd.gui;
  */
 public class Showroom extends javax.swing.JPanel {
 
-    /**
-     * Creates new form Showcustomer
-     */
-    public Showroom() {
+    public Showroom(Frame frame) {
         initComponents();
+        setBounds(0, 0, 800, 600);
+        add(new Header("Show Rooms"));
     }
 
     /**

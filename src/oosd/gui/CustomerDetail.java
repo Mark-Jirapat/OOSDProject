@@ -11,11 +11,10 @@ package oosd.gui;
  */
 public class CustomerDetail extends javax.swing.JPanel {
 
-    /**
-     * Creates new form CustomerDetail
-     */
-    public CustomerDetail() {
+    public CustomerDetail(Frame frame) {
         initComponents();
+        setBounds(0, 0, 800, 600);
+        add(new Header("Customer Detail"));
     }
 
     /**
@@ -154,9 +153,9 @@ public class CustomerDetail extends javax.swing.JPanel {
                         .addGap(18, 18, 18)
                         .addComponent(txtStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(Reserve)
-                    .addComponent(CheckIn))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(CheckIn)
+                    .addComponent(Reserve))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Rest)

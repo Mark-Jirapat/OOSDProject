@@ -11,11 +11,10 @@ package oosd.gui;
  */
 public class CheckSelect extends javax.swing.JPanel {
 
-    /**
-     * Creates new form ReserveSelect
-     */
-    public CheckSelect() {
+    public CheckSelect(Frame frame) {
         initComponents();
+        setBounds(0, 0, 800, 600);
+        add(new Header("Check-in : Select Room"));
     }
 
     /**

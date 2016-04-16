@@ -11,11 +11,10 @@ package oosd.gui;
  */
 public class EditProfile extends javax.swing.JPanel {
 
-    /**
-     * Creates new form SignUp
-     */
-    public EditProfile() {
+    public EditProfile(Frame frame) {
         initComponents();
+        setBounds(0, 0, 800, 600);
+        add(new Header("Edit Profile"));
     }
 
     /**
@@ -81,6 +80,8 @@ public class EditProfile extends javax.swing.JPanel {
 
         Address.setFont(new java.awt.Font("DokChampa", 0, 14)); // NOI18N
         Address.setText("ADDRESS");
+
+        txtUser.setBackground(new java.awt.Color(204, 204, 204));
 
         txtSocial.setBackground(new java.awt.Color(204, 204, 204));
 

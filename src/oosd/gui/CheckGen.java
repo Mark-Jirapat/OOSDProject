@@ -11,11 +11,10 @@ package oosd.gui;
  */
 public class CheckGen extends javax.swing.JPanel {
 
-    /**
-     * Creates new form ReserveGen
-     */
-    public CheckGen() {
+    public CheckGen(Frame frame) {
         initComponents();
+        setBounds(0, 0, 800, 600);
+        add(new Header("Check-in : General Detail"));
     }
 
     /**

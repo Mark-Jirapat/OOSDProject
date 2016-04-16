@@ -14,8 +14,10 @@ public class addCustomer extends javax.swing.JPanel {
     /**
      * Creates new form addCustomer
      */
-    public addCustomer() {
+    public addCustomer(Frame frame) {
         initComponents();
+        setBounds(0, 0, 800, 600);
+        add(new Header("Add new Customer"));
     }
 
     /**

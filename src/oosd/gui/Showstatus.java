@@ -11,11 +11,10 @@ package oosd.gui;
  */
 public class Showstatus extends javax.swing.JPanel {
 
-    /**
-     * Creates new form Showcustomer
-     */
-    public Showstatus() {
+    public Showstatus(Frame frame) {
         initComponents();
+        setBounds(0, 0, 800, 600);
+        add(new Header("Show Reserve and Check-in"));
     }
 
     /**

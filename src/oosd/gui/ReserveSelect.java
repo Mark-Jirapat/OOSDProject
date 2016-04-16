@@ -14,8 +14,10 @@ public class ReserveSelect extends javax.swing.JPanel {
     /**
      * Creates new form ReserveSelect
      */
-    public ReserveSelect() {
+    public ReserveSelect(Frame frame) {
         initComponents();
+        setBounds(0, 0, 800, 600);
+        add(new Header("Reservation : Select Room"));
     }
 
     /**
