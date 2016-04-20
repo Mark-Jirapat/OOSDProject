@@ -5,6 +5,8 @@
  */
 package oosd.gui;
 
+import View.Frame;
+
 /**
  *
  * @author USER
@@ -118,11 +120,11 @@ public class SignIn extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        frame.setCurrent(new Home(frame));
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        frame.setCurrent(new SignUp(frame));
+        
     }//GEN-LAST:event_jButton2ActionPerformed
 
 

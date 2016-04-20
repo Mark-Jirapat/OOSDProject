@@ -5,6 +5,8 @@
  */
 package oosd.gui;
 
+import View.Frame;
+
 /**
  *
  * @author USER

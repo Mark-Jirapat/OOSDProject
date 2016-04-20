@@ -21,21 +21,21 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="jPanel1" alignment="0" max="32767" attributes="0"/>
+          <Component id="emptyPanel" alignment="0" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="1" attributes="0">
-              <EmptySpace pref="143" max="32767" attributes="0"/>
-              <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
+              <EmptySpace pref="167" max="32767" attributes="0"/>
+              <Component id="emptyPanel" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
   </Layout>
   <SubComponents>
-    <Container class="javax.swing.JPanel" name="jPanel1">
+    <Container class="javax.swing.JPanel" name="emptyPanel">
       <Properties>
         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="ff" green="ff" red="ff" type="rgb"/>
@@ -48,12 +48,12 @@
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace min="-2" pref="224" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="logOut" alignment="0" min="-2" pref="350" max="-2" attributes="0"/>
-                      <Component id="Edit" alignment="0" min="-2" pref="350" max="-2" attributes="0"/>
-                      <Component id="showRest" min="-2" pref="350" max="-2" attributes="0"/>
-                      <Component id="showCustomer" min="-2" pref="350" max="-2" attributes="0"/>
-                      <Component id="addCustomer" min="-2" pref="350" max="-2" attributes="0"/>
-                      <Component id="showRoom" alignment="0" min="-2" pref="350" max="-2" attributes="0"/>
+                      <Component id="btnLogOut" alignment="0" min="-2" pref="350" max="-2" attributes="0"/>
+                      <Component id="btnEditProfile" alignment="0" min="-2" pref="350" max="-2" attributes="0"/>
+                      <Component id="btnShowRest" min="-2" pref="350" max="-2" attributes="0"/>
+                      <Component id="btnShowCustomer" min="-2" pref="350" max="-2" attributes="0"/>
+                      <Component id="btnAddCustomer" min="-2" pref="350" max="-2" attributes="0"/>
+                      <Component id="btnShowRoom" alignment="0" min="-2" pref="350" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace pref="226" max="32767" attributes="0"/>
               </Group>
@@ -63,70 +63,88 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
-                  <Component id="addCustomer" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Component id="showCustomer" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Component id="showRoom" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Component id="showRest" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace pref="146" max="32767" attributes="0"/>
-                  <Component id="Edit" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                  <Component id="logOut" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnAddCustomer" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="btnShowCustomer" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="btnShowRoom" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="btnShowRest" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace pref="185" max="32767" attributes="0"/>
+                  <Component id="btnEditProfile" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="btnLogOut" min="-2" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="49" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
       </Layout>
       <SubComponents>
-        <Component class="javax.swing.JButton" name="addCustomer">
+        <Component class="javax.swing.JButton" name="btnAddCustomer">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Tw Cen MT Condensed Extra Bold" size="18" style="0"/>
+              <Font name="Tahoma" size="13" style="1"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Add New Customer"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAddCustomerActionPerformed"/>
+          </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="showCustomer">
+        <Component class="javax.swing.JButton" name="btnShowCustomer">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Tw Cen MT Condensed Extra Bold" size="18" style="0"/>
+              <Font name="Tahoma" size="13" style="1"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Show Customer detail"/>
+            <Property name="text" type="java.lang.String" value="Show Customer"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnShowCustomerActionPerformed"/>
+          </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="showRoom">
+        <Component class="javax.swing.JButton" name="btnShowRoom">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Tw Cen MT Condensed Extra Bold" size="18" style="0"/>
+              <Font name="Tahoma" size="13" style="1"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Show room detail"/>
+            <Property name="text" type="java.lang.String" value="Show Room"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnShowRoomActionPerformed"/>
+          </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="showRest">
+        <Component class="javax.swing.JButton" name="btnShowRest">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Tw Cen MT Condensed Extra Bold" size="18" style="0"/>
+              <Font name="Tahoma" size="13" style="1"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Show rest detail"/>
+            <Property name="text" type="java.lang.String" value="Show Rest"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnShowRestActionPerformed"/>
+          </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="Edit">
+        <Component class="javax.swing.JButton" name="btnEditProfile">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Tw Cen MT Condensed Extra Bold" size="18" style="0"/>
+              <Font name="Tahoma" size="13" style="1"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Edit Profile"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnEditProfileActionPerformed"/>
+          </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="logOut">
+        <Component class="javax.swing.JButton" name="btnLogOut">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Tw Cen MT Condensed Extra Bold" size="18" style="0"/>
+              <Font name="Tahoma" size="13" style="1"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Log Out"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnLogOutActionPerformed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
