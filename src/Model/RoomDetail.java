@@ -18,7 +18,9 @@ public class RoomDetail implements CanSetAllDetail{
         Database database = new Database("RoomDetail/setAllDetailToDatabase");
         String sql = "SELECT restNo,status FROM rest WHERE rest.restNo = restDetail.restNo AND restDetail.roomNo = room.roomNo AND room.roomNo = '" + room.getRoomNo() + "'";
         System.out.println(sql);
-        ResultSet rs = database.doExecuteQuery(sql);
+        database.connect(); 
+        database.createStatement();
+        ResultSet rs = database.executeQuery(sql);
         try {
             while(rs.next()){
                 if(rs.getInt("status") == 0){
@@ -33,6 +35,7 @@ public class RoomDetail implements CanSetAllDetail{
         } catch (Exception e){
             System.out.println("ERROR : @RoomDetail/setAllDetailToDatabase > " + e);
         }
+        database.disconnect();
     }
     
 }
