@@ -18,7 +18,9 @@ public class RoomType implements CanSetAllDetail {
         Database database = new Database("RoomType/setAllDetailToDatabase");
         String sql = "SELECT * FROM roomType WHERE roomTypeNo = '" + roomTypeNo + "'";
         System.out.println(sql);
-        ResultSet rs = database.doExecuteQuery(sql);
+        database.connect(); 
+        database.createStatement();
+        ResultSet rs = database.executeQuery(sql);
         try {
             if(rs.next()){
                 roomTypeNo = rs.getInt("roomTypeNo");
@@ -29,6 +31,7 @@ public class RoomType implements CanSetAllDetail {
         } catch (Exception e){
             System.out.println("ERROR : @RoomType/setAllDetailToDatabase > " + e);
         }
+        database.disconnect();
     }
 
     public int getRoomTypeNo() {
