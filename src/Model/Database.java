@@ -10,6 +10,9 @@ public class Database {
     private Connection connection;
     private Statement statement;
     
+    public Database(){
+    }
+    
     public Database(String text){
         System.out.println("----- " + text + " -----");
     }
@@ -26,14 +29,14 @@ public class Database {
 
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            String host = "jdbc:mysql://127.0.0.1/seproject";
+            String host = "jdbc:mysql://127.0.0.1/csc105_g5";
             String user = "root";
             String pass = "";
             connection = DriverManager.getConnection(host, user, pass);
-            System.out.println("Database : Connect Success");
+            //System.out.println("Database : Connect Success");
         } catch (Exception e) {
             System.out.println(e.getMessage());
-            System.out.println("Database : Connect Fail");
+            //System.out.println("Database : Connect Fail");
         }
 
     }
@@ -42,30 +45,30 @@ public class Database {
         try {
             statement.close();
             connection.close();
-            System.out.println("Database : Disconnect Success");
+            //System.out.println("Database : Disconnect Success");
         } catch (Exception e) {
             System.out.println(e.getMessage());
-            System.out.println("Database : Disconnect Fail");
+            //System.out.println("Database : Disconnect Fail");
         }
     }
     
     public void createStatement(){
         try {
             statement = getConnection().createStatement();
-            System.out.println("Database : Create Statement Success");
+            //System.out.println("Database : Create Statement Success");
         } catch (Exception e) {
             System.out.println(e.getMessage());
-            System.out.println("Database : Create Statement Fail");
+            //System.out.println("Database : Create Statement Fail");
         }
     }
     
     public void execute(String sql){ // INSERT, UPDATE, DELETE
         try {
             getStatement().execute(sql);
-            System.out.println("Database : Execute Success");
+            //System.out.println("Database : Execute Success");
         } catch (Exception e) {
             System.out.println(e.getMessage());
-            System.out.println("Database : Execute Fail");
+            //System.out.println("Database : Execute Fail");
         }
     }
     
@@ -73,26 +76,11 @@ public class Database {
         ResultSet rs = null;
         try {
             rs = statement.executeQuery(sql);
-            System.out.println("Database : ExecuteQuery Success");
+            //System.out.println("Database : ExecuteQuery Success");
         } catch (Exception e) {
             System.out.println(e.getMessage());
-            System.out.println("Database : ExecuteQuery Fail");
+            //System.out.println("Database : ExecuteQuery Fail");
         }
         return rs;
-    }
-    
-    public void doExecute(String sql){
-        connect();
-        createStatement();
-        execute(sql);
-        disconnect();
-    }
-    
-    public ResultSet doExecuteQuery(String sql){
-        connect();
-        createStatement();
-        ResultSet resultSet = executeQuery(sql);
-        disconnect();
-        return resultSet;
     }
 }

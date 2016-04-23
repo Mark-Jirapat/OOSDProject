@@ -4,14 +4,14 @@ import java.sql.ResultSet;
 
 public class PersonDetail implements CanAdd, CanSetAllDetail {
     
-    private int socialNo;
+    private String socialNo;
     private String firstName;
     private String lastName;
     private int gender;
     private String telephoneNo;
     private String address;
 
-    public PersonDetail(int socialNo, String firstName, String lastName, int gender, String telephoneNo, String address) {
+    public PersonDetail(String socialNo, String firstName, String lastName, int gender, String telephoneNo, String address) {
         this.socialNo = socialNo;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -20,42 +20,49 @@ public class PersonDetail implements CanAdd, CanSetAllDetail {
         this.address = address;
     }
 
-    public PersonDetail(int socialNo) {
+    public PersonDetail(String socialNo) {
         this.socialNo = socialNo;
     }
 
     @Override
     public void addToDatabase() {
         Database database = new Database("PersonDetail/addToDatabase");
-        String sql = "INSERT TO person VALUES ('"+ socialNo + "'"+ firstName + "'"+ lastName + "'"+ gender + "'"+ telephoneNo + "'"+ address + "')";
+        String sql = "INSERT INTO person VALUES ('"+ socialNo + "','"+ firstName + "','"+ lastName + "','"+ gender + "','"+ telephoneNo + "','"+ address + "')";
         System.out.println(sql);
-        database.doExecute(sql);
+        database.connect(); 
+        database.createStatement();
+        database.execute(sql);
+        database.disconnect();
     }
     
+    @Override
     public void setAllDetailFromDatabase() {
-        Database database = new Database("PersonDetail/setAllDetailToDatabase");
+        Database database = new Database("PersonDetail/setAllDetailFromDatabase");
         String sql = "SELECT * FROM person WHERE socialNo = '" + socialNo + "'";
         System.out.println(sql);
-        ResultSet rs = database.doExecuteQuery(sql);
+        database.connect(); 
+        database.createStatement();
+        ResultSet rs = database.executeQuery(sql);
         try {
             if(rs.next()){
-                socialNo = rs.getInt("socialNo");
+                socialNo = rs.getString("socialNo");
                 firstName = rs.getString("firstName");
                 lastName = rs.getString("lastName");
-                gender = rs.getInt("socialNo");
+                gender = rs.getInt("gender");
                 telephoneNo = rs.getString("telephoneNo");
                 address = rs.getString("address");
             }
         } catch (Exception e){
-            System.out.println("ERROR : @PersonDetail/setAllDetailToDatabase > " + e);
+            System.out.println("ERROR : @PersonDetail/setAllDetailFromDatabase > " + e);
         }
+        database.disconnect();
     }
 
-    public int getSocialNo() {
+    public String getSocialNo() {
         return socialNo;
     }
 
-    public void setSocialNo(int socialNo) {
+    public void setSocialNo(String socialNo) {
         this.socialNo = socialNo;
     }
 
@@ -83,12 +90,12 @@ public class PersonDetail implements CanAdd, CanSetAllDetail {
         this.gender = gender;
     }
 
-    public String getTelephonNo() {
+    public String getTelephoneNo() {
         return telephoneNo;
     }
 
-    public void setTelephonNo(String telephonNo) {
-        this.telephoneNo = telephonNo;
+    public void setTelephoneNo(String telephoneNo) {
+        this.telephoneNo = telephoneNo;
     }
 
     public String getAddress() {
@@ -99,6 +106,8 @@ public class PersonDetail implements CanAdd, CanSetAllDetail {
         this.address = address;
     }
     
-    
+    public String getGenderToString(){
+        return ((gender == 0)?"Male":"Female") ;
+    }
     
 }
