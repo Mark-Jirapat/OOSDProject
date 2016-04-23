@@ -8,13 +8,13 @@ public class UserDetail extends PersonDetail {
     private String password;
     private boolean admin;
 
-    public UserDetail(int socialNo, String firstName, String lastName, int gender, String telephoneNo, String address, String userName, String password) { //FOR NEW USER
+    public UserDetail(String socialNo, String firstName, String lastName, int gender, String telephoneNo, String address, String userName, String password) { //FOR NEW USER
         super(socialNo, firstName, lastName, gender, telephoneNo, address);
         this.userName = userName;
         this.password = password;
     }
     
-    public UserDetail(int socialNo){ //NEED SET DETAIL
+    public UserDetail(String socialNo){ //NEED SET DETAIL
         super(socialNo);
     }
 
@@ -22,9 +22,12 @@ public class UserDetail extends PersonDetail {
     public void addToDatabase() {
         super.addToDatabase();
         Database database = new Database("UserDetail/addToDatabase");
-        String sql = "INSERT TO user VALUES ('"+ getSocialNo() + "'"+ userName + "'"+ password + "')";
+        String sql = "INSERT INTO user VALUES ('"+ getSocialNo() + "','"+ userName + "','"+ password + "')";
         System.out.println(sql);
-        database.doExecute(sql);
+        database.connect(); 
+        database.createStatement();
+        database.execute(sql);
+        database.disconnect();
     }
     
     @Override
@@ -33,7 +36,9 @@ public class UserDetail extends PersonDetail {
         Database database = new Database("UserDetail/setAllDetailToDatabase");
         String sql = "SELECT * FROM user WHERE socialNo = '" + getSocialNo() + "'";
         System.out.println(sql);
-        ResultSet rs = database.doExecuteQuery(sql);
+        database.connect(); 
+        database.createStatement();
+        ResultSet rs = database.executeQuery(sql);
         try {
             if(rs.next()){
                 userName = rs.getString("userName");
@@ -43,20 +48,25 @@ public class UserDetail extends PersonDetail {
         } catch (Exception e){
             System.out.println("ERROR : @UserDetail/setAllDetailToDatabase > " + e);
         }
+        database.disconnect();
     }
     
     public boolean isAdminFromDatabase(){
-        Database database = new Database("UserDetail/setAllDetailToDatabase");
+        Database database = new Database("UserDetail/isAdminFromDatabase");
         String sql = "SELECT * FROM admin WHERE socialNo = '" + getSocialNo() + "'";
         System.out.println(sql);
-        ResultSet rs = database.doExecuteQuery(sql);
+        database.connect(); 
+        database.createStatement();
+        ResultSet rs = database.executeQuery(sql);
         try {
             if(rs.next()){
+                database.disconnect();
                 return true;
             }
         } catch (Exception e){
-            System.out.println("ERROR : @UserDetail/setAllDetailToDatabase > " + e);
+            System.out.println("ERROR : @UserDetail/isAdminFromDatabase > " + e);
         }
+        database.disconnect();
         return false;
     }
 
