@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+import org.freixas.jcalendar.JCalendar;
 
 public class Tools {
 
@@ -198,10 +199,6 @@ public class Tools {
         }
     }
 
-    public boolean isNotRowSelected(int row) {
-        return (row == -1);
-    }
-
     public CustomerDetail getCustomerFromCustomerList(String socialNo, ArrayList<CustomerDetail> customers) {
         for (CustomerDetail c : customers) {
             if (c.getSocialNo().equals(socialNo)) {
@@ -239,7 +236,7 @@ public class Tools {
         }
         int row = 0;
         for (Room r : rooms) {
-            ((DefaultTableModel) table.getModel()).addRow(new Object[]{null, null, null, null, null});
+            ((DefaultTableModel) table.getModel()).addRow(new Object[]{null, null, null, 0, null, false});
             table.getModel().setValueAt(r.getRoomNo(), row, 0);
             table.getModel().setValueAt(r.getRoomType().getRoomTypeName(), row, 1);
             table.getModel().setValueAt(r.getFloorNo(), row, 2);
@@ -376,18 +373,18 @@ public class Tools {
         int status = statusType - 1;
         String dateInFormat = (date.getYear() + 1900) + "-" + (date.getMonth() + 1) + "-" + date.getDate();
         String sql;
-        if(!isDateSelected){
-           if(status == -1){
-               return getAllRestFromDatabase();
-           } else {
-               sql = "SELECT restNo FROM rest WHERE status = '" + status + "'";
-           }
+        if (!isDateSelected) {
+            if (status == -1) {
+                return getAllRestFromDatabase();
+            } else {
+                sql = "SELECT restNo FROM rest WHERE status = '" + status + "'";
+            }
         } else {
-            if(status == -1){
-               sql = "SELECT restNo FROM rest WHERE '" + dateInFormat + "' BETWEEN startDate AND endDate";
-           } else {
-               sql = "SELECT restNo FROM rest WHERE status = '" + status + "' AND '" + dateInFormat + "' BETWEEN startDate AND endDate";
-           }
+            if (status == -1) {
+                sql = "SELECT restNo FROM rest WHERE '" + dateInFormat + "' BETWEEN startDate AND endDate";
+            } else {
+                sql = "SELECT restNo FROM rest WHERE status = '" + status + "' AND '" + dateInFormat + "' BETWEEN startDate AND endDate";
+            }
         }
         System.out.println(sql);
         database.connect();
@@ -406,4 +403,129 @@ public class Tools {
         database.disconnect();
         return rests;
     }
+
+    public Room getRoomFromRoomList(int roomNo, ArrayList<Room> rooms) {
+        for (Room r : rooms) {
+            if (r.getRoomNo() == roomNo) {
+                return r;
+            }
+        }
+        return null;
+    }
+
+    public void setReservedListToTable(JTable table, ArrayList<RestForm> reservedRests) {
+        if (reservedRests == null || reservedRests.isEmpty()) {
+            return;
+        }
+        int row = 0;
+        for (RestForm r : reservedRests) {
+            ((DefaultTableModel) table.getModel()).addRow(new Object[]{null, null, null, null, null});
+            table.getModel().setValueAt(r.getCustomer().getSocialNo(), row, 0);
+            table.getModel().setValueAt(r.getCustomer().getFirstName(), row, 1);
+            table.getModel().setValueAt(r.getCustomer().getLastName(), row, 2);
+            table.getModel().setValueAt(r.getStartDateToString(), row, 3);
+            table.getModel().setValueAt(r.getEndDateToString(), row, 4);
+            row++;
+        }
+    }
+
+    public Date getCurrentDate() {
+        Date date = new JCalendar().getDate();
+        Date currentDate = new Date(date.getYear(), date.getMonth(), date.getDate());
+        return currentDate;
+    }
+
+    public ArrayList<Room> getAvialableRoomFromDatabase(Date startDate, Date endDate) {
+        ArrayList<Room> rooms = null;
+        String startDateInFormat = (startDate.getYear() + 1900) + "-" + (startDate.getMonth() + 1) + "-" + startDate.getDate();
+        String endDateInFormat = (endDate.getYear() + 1900) + "-" + (endDate.getMonth() + 1) + "-" + endDate.getDate();
+        Database database = new Database("Tools/getAvialableRoomFromDatabase");
+        String condition = "(SELECT restNo FROM rest WHERE startDate BETWEEN '" + startDateInFormat + "' AND '" + endDateInFormat + "' OR '" + startDateInFormat + "' BETWEEN startDate and endDate OR '" + endDateInFormat + "' BETWEEN startDate AND endDate)";
+        String condition2 = "(SELECT roomNo FROM restDetail WHERE restNo IN " + condition + ")";
+        String sql = "SELECT roomNo FROM room WHERE roomNo NOT IN " + condition2;
+        System.out.println(sql);
+        database.connect();
+        database.createStatement();
+        ResultSet rs = database.executeQuery(sql);
+        try {
+            rooms = new ArrayList<>();
+            while (rs.next()) {
+                Room room = new Room(rs.getInt("roomNo"));
+                room.setAllDetailFromDatabase();
+                System.out.println(room.getRoomNo());
+                rooms.add(room);
+            }
+        } catch (Exception e) {
+            System.out.println("ERROR : @Tools/getAvialableRoomFromDatabase > " + e);
+        }
+        database.disconnect();
+        return rooms;
+    }
+
+    public ArrayList<Room> getRoomListFromRoomList(ArrayList<Room> rooms, ArrayList<Integer> selectedRoomNo) {
+        ArrayList<Room> selectedRooms = new ArrayList<>();
+        for (Integer roomNo : selectedRoomNo) {
+            for (Room r : rooms) {
+                if (r.getRoomNo() == roomNo) {
+                    selectedRooms.add(r);
+                }
+            }
+        }
+        if (selectedRooms.isEmpty()) {
+            return null;
+        }
+        return selectedRooms;
+    }
+
+    public RestForm getRestFromDatabase(String socialNo) {
+        RestForm rest = null;
+        Database database = new Database("Tools/getRestFromDatabase");
+        String sql = "SELECT restNo FROM rest WHERE socialNo = '" + socialNo + "'";
+        System.out.println(sql);
+        database.connect();
+        database.createStatement();
+        ResultSet rs = database.executeQuery(sql);
+        try {
+            if (rs.next()) {
+                rest = new RestForm(rs.getInt("restNo"));
+                rest.setAllDetailFromDatabase();
+            }
+        } catch (Exception e) {
+            System.out.println("ERROR : @Tools/getRestFromDatabase > " + e);
+        }
+        database.disconnect();
+        return rest;
+    }
+
+    public void removeExpiredReserveFromDatebase(Date currentDate) {
+        ArrayList<Integer> restNoList = null;
+        String currentDateInFormat = (currentDate.getYear() + 1900) + "-" + (currentDate.getMonth() + 1) + "-" + currentDate.getDate();
+        Database database = new Database("Tools/removeExpiredReserveFromDatebase");
+        String sql = "SELECT restNo FROM rest WHERE startDate < '" + currentDateInFormat + "' AND status = '1'";
+        System.out.println(sql);
+        database.connect();
+        database.createStatement();
+        ResultSet rs = database.executeQuery(sql);
+        try {
+            restNoList = new ArrayList<>();
+            while (rs.next()) {
+                restNoList.add(rs.getInt("restNo"));
+            }
+        } catch (Exception e) {
+            System.out.println("ERROR : @Tools/removeExpiredReserveFromDatebase > " + e);
+        }
+        for (Integer restNo : restNoList) {
+            sql = "DELETE FROM rest WHERE restNo = '" + restNo + "'";
+            System.out.println(sql);
+            database.execute(sql);
+        }
+        for (Integer restNo : restNoList) {
+            sql = "DELETE FROM restDetail WHERE restNo = '" + restNo + "'";
+            System.out.println(sql);
+            database.execute(sql);
+        }
+        database.disconnect();
+        System.out.println("*** " + restNoList.size() + " Expired Reserved Detail ***");
+    }
+
 }

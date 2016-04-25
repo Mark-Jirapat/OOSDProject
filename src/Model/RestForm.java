@@ -2,9 +2,10 @@ package Model;
 
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 
-public class RestForm implements CanAdd, CanSetAllDetail {
+public class RestForm implements CanAdd, CanSetAllDetail, CanDelete, CanUpdate {
 
     private int restNo;
     private CustomerDetail customer;
@@ -14,44 +15,64 @@ public class RestForm implements CanAdd, CanSetAllDetail {
     private int status;
     private ArrayList<Room> rooms;
 
-    public RestForm(int restNo) { //NEED SET DETAIL
+    public RestForm(int restNo) { // NEED SET DETAIL
         this.restNo = restNo;
         rooms = new ArrayList<Room>();
     }
-
-    public RestForm(int restNo, CustomerDetail customer, int amountOfPeople, Date startDate, Date endDate, int status, ArrayList<Room> rooms) { //FOR NEW REST
+    
+    public RestForm(int restNo, int status) { // NEED SET DETAIL , FOR SUB CLASS
         this.restNo = restNo;
-        this.customer = customer;
-        this.amountOfPeople = amountOfPeople;
-        this.startDate = startDate;
-        this.endDate = endDate;
         this.status = status;
-        this.rooms = rooms;
+        rooms = new ArrayList<Room>();
+    }
+
+    public RestForm(CustomerDetail customer, int status) { //FOR NEW REST , FOR SUB CLASS
+        this.customer = customer;
+        this.status = status;
     }
 
     @Override
     public void addToDatabase() {
         Database database = new Database("RestForm/addToDatabase");
-        String sql = "INSERT INTO rest VALUES (NULL" + getCustomer().getSocialNo() + "'" + amountOfPeople + "'" + startDate + "'" + endDate + "'" + status + "')";
+        String startDateInFormat = (startDate.getYear() + 1900) + "-" + (startDate.getMonth() + 1) + "-" + startDate.getDate();
+        String endDateInFormat = (endDate.getYear() + 1900) + "-" + (endDate.getMonth() + 1) + "-" + endDate.getDate();
+        String sql = "INSERT INTO rest VALUES (NULL,'" + getCustomer().getSocialNo() + "','" + amountOfPeople + "','" + startDateInFormat + "','" + endDateInFormat + "','" + status + "')";
         System.out.println(sql);
         database.connect();
         database.createStatement();
         database.execute(sql);
-        sql = "SELECT restNo FORM rest WHERE customerNo = '" + getCustomer().getSocialNo() + "'";
+        database.disconnect();
+        setRestNoFromDataBase();
+        addRoomListToDatabase();
+    }
+
+    public void setRestNoFromDataBase() {
+        Database database = new Database("RestForm/setRestNoFromDataBase");
+        String sql = "SELECT restNo FROM rest WHERE socialNo = '" + getCustomer().getSocialNo() + "'";
+        System.out.println(sql);
+        database.connect();
+        database.createStatement();
         ResultSet rs = database.executeQuery(sql);
         try {
             if (rs.next()) {
                 restNo = rs.getInt("restNo");
             }
         } catch (Exception e) {
-            System.out.println("ERROR : @RestForm/addToDatabase > " + e);
-        }
-        for (Room r : rooms) {
-            sql = "INSERT INTO restDetail VALUES ('" + restNo + "','" + r.getRoomNo() + "')";
-            System.out.println(sql);
-            database.execute(sql);
+            System.out.println("ERROR : @RestForm/setRestNoFromDataBase > " + e);
         }
         database.disconnect();
+    }
+
+    public void addRoomListToDatabase() {
+        Database database = new Database("RestForm/addRoomListToDatabase");
+        for (Room r : rooms) {
+            String sql = "INSERT INTO restDetail VALUES ('" + restNo + "','" + r.getRoomNo() + "')";
+            System.out.println(sql);
+            database.connect();
+            database.createStatement();
+            database.execute(sql);
+            database.disconnect();
+        }
     }
 
     @Override
@@ -84,13 +105,66 @@ public class RestForm implements CanAdd, CanSetAllDetail {
         database.disconnect();
     }
 
-    public int getTotalPrice() { //INCOMPLETE
+    @Override
+    public void deleteFromDatabase() {
+        Database database = new Database("RestForm/deleteFromDatabase");
+        database.connect();
+        database.createStatement();
+        String sql = "DELETE FROM rest WHERE restNo = '" + restNo + "'";
+        System.out.println(sql);
+        database.execute(sql);
+        sql = "DELETE FROM restDetail WHERE restNo = '" + restNo + "'";
+        System.out.println(sql);
+        database.execute(sql);
+        database.disconnect();
+    }
+
+    @Override
+    public void updateToDatabase() {
+        Database database = new Database("RestFormDetail/updateToDatabase");
+        String sql = "UPDATE rest SET status = '" + status + "' WHERE restNo = '" + restNo + "'";
+        System.out.println(sql);
+        database.connect();
+        database.createStatement();
+        database.execute(sql);
+        database.disconnect();
+    }
+
+    public int getExtraPrice() {
+        int extraPrice = 0;
+        int extraDay = getExtraDay();
+        if (extraDay > 0) {
+            for (Room r : rooms) {
+                extraPrice += r.getRoomType().getPrice();
+            }
+            extraPrice *= extraDay;
+        }
+        return extraPrice;
+    }
+
+    public int getExtraDay() {
+        Date currentDate = new Tools().getCurrentDate();
+        if(endDate.equals(currentDate) || endDate.after(currentDate)){
+            return 0;
+        }
+        Calendar calCurrentDate = Calendar.getInstance();
+        calCurrentDate.setTime(currentDate);
+        Calendar calEndDate = Calendar.getInstance();
+        calEndDate.setTime(endDate);
+        int extraDay = 0;
+        while (calEndDate.before(calCurrentDate)) {
+            calEndDate.add(Calendar.DAY_OF_MONTH, 1);
+            extraDay++;
+        }
+        return extraDay;
+    }
+
+    public int getTotalPrice() {
         int totalPrice = 0;
-        int amountOfDay = 0; //GET amount of day SOME HOW ..
         for (Room r : rooms) {
             totalPrice += r.getRoomType().getPrice();
         }
-        totalPrice *= amountOfDay;
+        totalPrice *= getTotalDay();
         return totalPrice;
     }
 
@@ -100,6 +174,23 @@ public class RestForm implements CanAdd, CanSetAllDetail {
             totalBed += r.getRoomType().getAmountOfBed();
         }
         return totalBed;
+    }
+
+    public int getTotalRoom() {
+        return rooms.size();
+    }
+
+    public int getTotalDay() {
+        Calendar calStartDate = Calendar.getInstance();
+        calStartDate.setTime(startDate);
+        Calendar calEndDate = Calendar.getInstance();
+        calEndDate.setTime(endDate);
+        int totalDay = 1;
+        while (calStartDate.before(calEndDate)) {
+            calStartDate.add(Calendar.DAY_OF_MONTH, 1);
+            totalDay++;
+        }
+        return totalDay;
     }
 
     public int getRestNo() {

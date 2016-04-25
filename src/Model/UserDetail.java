@@ -2,11 +2,10 @@ package Model;
 
 import java.sql.ResultSet;
 
-public class UserDetail extends PersonDetail {
+public class UserDetail extends PersonDetail implements CanUpdate {
     
     private String userName;
     private String password;
-    private boolean admin;
 
     public UserDetail(String socialNo, String firstName, String lastName, int gender, String telephoneNo, String address, String userName, String password) { //FOR NEW USER
         super(socialNo, firstName, lastName, gender, telephoneNo, address);
@@ -43,7 +42,6 @@ public class UserDetail extends PersonDetail {
             if(rs.next()){
                 userName = rs.getString("userName");
                 password = rs.getString("password");
-                admin = isAdminFromDatabase();
             }
         } catch (Exception e){
             System.out.println("ERROR : @UserDetail/setAllDetailToDatabase > " + e);
@@ -51,23 +49,18 @@ public class UserDetail extends PersonDetail {
         database.disconnect();
     }
     
-    public boolean isAdminFromDatabase(){
-        Database database = new Database("UserDetail/isAdminFromDatabase");
-        String sql = "SELECT * FROM admin WHERE socialNo = '" + getSocialNo() + "'";
+    @Override
+    public void updateToDatabase() {
+        Database database = new Database("UserDetail/updateToDatabase");
+        String sql = "UPDATE user SET password = '"+ password + "' WHERE socialNo = '" + getSocialNo() + "'";
         System.out.println(sql);
         database.connect(); 
         database.createStatement();
-        ResultSet rs = database.executeQuery(sql);
-        try {
-            if(rs.next()){
-                database.disconnect();
-                return true;
-            }
-        } catch (Exception e){
-            System.out.println("ERROR : @UserDetail/isAdminFromDatabase > " + e);
-        }
+        database.execute(sql);
+        sql = "UPDATE person SET firstName = '"+ getFirstName() + "', lastName = '"+ getLastName() + "', gender = '"+ getGender() + "', telephoneNo = '"+ getTelephoneNo() + "', address = '"+ getAddress() + "' WHERE socialNo = '" + getSocialNo() + "'";
+        System.out.println(sql);
+        database.execute(sql);
         database.disconnect();
-        return false;
     }
 
     public String getUserName() {
@@ -86,12 +79,4 @@ public class UserDetail extends PersonDetail {
         this.password = password;
     }
 
-    public boolean isAdmin() {
-        return admin;
-    }
-
-    public void setAdmin(boolean isAdmin) {
-        this.admin = isAdmin;
-    }   
-    
 }

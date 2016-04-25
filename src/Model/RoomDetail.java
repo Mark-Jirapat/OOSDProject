@@ -11,12 +11,14 @@ public class RoomDetail implements CanSetAllDetail{
 
     public RoomDetail(Room room) {
         this.room = room;
+        currentRest = null;
+        reservedRests = new ArrayList<>();
     }
 
     @Override
     public void setAllDetailFromDatabase() {
         Database database = new Database("RoomDetail/setAllDetailToDatabase");
-        String sql = "SELECT restNo,status FROM rest WHERE rest.restNo = restDetail.restNo AND restDetail.roomNo = room.roomNo AND room.roomNo = '" + room.getRoomNo() + "'";
+        String sql = "SELECT rest.restNo,status FROM rest,restDetail,room WHERE rest.restNo = restDetail.restNo AND restDetail.roomNo = room.roomNo AND room.roomNo = '" + room.getRoomNo() + "'";
         System.out.println(sql);
         database.connect(); 
         database.createStatement();
@@ -24,10 +26,10 @@ public class RoomDetail implements CanSetAllDetail{
         try {
             while(rs.next()){
                 if(rs.getInt("status") == 0){
-                    currentRest = new RestForm(rs.getInt("restNo"));
+                    currentRest = new CheckInForm(rs.getInt("restNo"));
                     currentRest.setAllDetailFromDatabase();
                 } else if (rs.getInt("status") == 1){
-                    RestForm rf = new RestForm(rs.getInt("restNo"));
+                    RestForm rf = new ReserveForm(rs.getInt("restNo"));
                     rf.setAllDetailFromDatabase();
                     reservedRests.add(rf);
                 }
@@ -37,5 +39,31 @@ public class RoomDetail implements CanSetAllDetail{
         }
         database.disconnect();
     }
+
+    public Room getRoom() {
+        return room;
+    }
+
+    public void setRoom(Room room) {
+        this.room = room;
+    }
+
+    public RestForm getCurrentRest() {
+        return currentRest;
+    }
+
+    public void setCurrentRest(RestForm currentRest) {
+        this.currentRest = currentRest;
+    }
+
+    public ArrayList<RestForm> getReservedRests() {
+        return reservedRests;
+    }
+
+    public void setReservedRests(ArrayList<RestForm> reservedRests) {
+        this.reservedRests = reservedRests;
+    }
+    
+    
     
 }
