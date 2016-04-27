@@ -2,15 +2,18 @@ package View;
 
 import Controller.Controller;
 import Model.CustomerDetail;
+import javax.swing.JPanel;
 
 public class ShowCustomerDetail extends javax.swing.JPanel {
     
     Controller controller;
     CustomerDetail customer;
+    JPanel back;
 
-    public ShowCustomerDetail(Controller controller, CustomerDetail customer) {
+    public ShowCustomerDetail(Controller controller, CustomerDetail customer,JPanel back) {
         this.controller = controller;
         this.customer = customer;
+        this.back = back;
         initComponents();
         setBounds(0, 0, 800, 600);
         add(new Header("Customer Detail"));
@@ -22,14 +25,11 @@ public class ShowCustomerDetail extends javax.swing.JPanel {
         txtAddress.setText(customer.getAddress());
         txtStatus.setText(customer.getStatusToString());
         if(customer.getStatus() == -1){
-            btnCommand1.setText("Reserve");
-            btnCommand2.setText("Check In");
-        } else if (customer.getStatus() == 1){
             btnCommand1.setText("Check In");
-            btnCommand2.setText("Detail");
-        } else {
-            btnCommand1.setText("Check Out");
-            btnCommand2.setText("Detail");
+            btnCommand2.setText("Reserve");
+        }  else {
+            btnCommand1.setText("Detail");
+            btnCommand2.hide();
         }
     }
 
@@ -155,39 +155,36 @@ public class ShowCustomerDetail extends javax.swing.JPanel {
         emptyPanelLayout.setHorizontalGroup(
             emptyPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, emptyPanelLayout.createSequentialGroup()
-                .addContainerGap(262, Short.MAX_VALUE)
+                .addContainerGap(254, Short.MAX_VALUE)
                 .addGroup(emptyPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, emptyPanelLayout.createSequentialGroup()
-                        .addGroup(emptyPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblAddress, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(lblTelephoneNo, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(lblGender, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(lblLastName, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(lblFirstName, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(lblSocialNo, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(lblStatus, javax.swing.GroupLayout.Alignment.TRAILING))
-                        .addGap(18, 18, 18)
-                        .addGroup(emptyPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txtSocialNo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(txtFirstName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(txtLastName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(txtTelephoneNo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(scrollPaneForTxtAddress)
-                            .addComponent(txtGender, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(55, 55, 55))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, emptyPanelLayout.createSequentialGroup()
+                    .addComponent(lblAddress, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(lblTelephoneNo, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(lblGender, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(lblLastName, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(lblFirstName, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(lblSocialNo, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(lblStatus, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addGap(18, 18, 18)
+                .addGroup(emptyPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnBack, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(emptyPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(txtSocialNo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(txtFirstName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(txtLastName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(txtTelephoneNo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(scrollPaneForTxtAddress)
+                        .addComponent(txtGender, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(emptyPanelLayout.createSequentialGroup()
                         .addComponent(btnCommand1, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnCommand2, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnBack, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(202, 202, 202))
+                        .addComponent(btnCommand2, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(231, 231, 231))
         );
         emptyPanelLayout.setVerticalGroup(
             emptyPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, emptyPanelLayout.createSequentialGroup()
-                .addContainerGap(28, Short.MAX_VALUE)
+            .addGroup(emptyPanelLayout.createSequentialGroup()
+                .addGap(25, 25, 25)
                 .addGroup(emptyPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblSocialNo)
                     .addComponent(txtSocialNo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -218,9 +215,10 @@ public class ShowCustomerDetail extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(emptyPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnCommand1)
-                    .addComponent(btnCommand2)
-                    .addComponent(btnBack))
-                .addGap(45, 45, 45))
+                    .addComponent(btnCommand2))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnBack)
+                .addContainerGap(25, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -234,20 +232,20 @@ public class ShowCustomerDetail extends javax.swing.JPanel {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(114, Short.MAX_VALUE)
                 .addComponent(emptyPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(66, 66, 66))
+                .addGap(57, 57, 57))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnCommand1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCommand1ActionPerformed
-        // TODO add your handling code here:
+        controller.btnCommand1OnShowCustomerDetail(customer, this);
     }//GEN-LAST:event_btnCommand1ActionPerformed
 
     private void btnCommand2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCommand2ActionPerformed
-        // TODO add your handling code here:
+        controller.btnCommand2OnShowCustomerDetail(customer, this);
     }//GEN-LAST:event_btnCommand2ActionPerformed
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
-        controller.goBack();
+        controller.goBack(back);
     }//GEN-LAST:event_btnBackActionPerformed
 
 

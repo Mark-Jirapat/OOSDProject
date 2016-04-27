@@ -190,7 +190,12 @@ public class ShowRoom extends javax.swing.JPanel {
     }//GEN-LAST:event_btnSearchActionPerformed
 
     private void btnDetailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDetailActionPerformed
-        // TODO add your handling code here:
+        if(table.getSelectedRow() == -1){
+            controller.error("Please select a row.");
+        } else {
+            int roomNo = (int) table.getModel().getValueAt(table.getSelectedRow(), 0);
+            controller.btnDetailOnShowRoom(roomNo, rooms, this);
+        }
     }//GEN-LAST:event_btnDetailActionPerformed
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed

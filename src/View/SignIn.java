@@ -10,8 +10,8 @@ public class SignIn extends javax.swing.JPanel {
         this.controller = controller;
         initComponents();
         setBounds(0, 0, 800, 600);
-        txtUserName.setText("");
-        txtPassword.setText("");
+        txtUserName.setText("pingmpz");
+        txtPassword.setText("forever");
         
     }
 

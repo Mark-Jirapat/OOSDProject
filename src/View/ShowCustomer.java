@@ -176,7 +176,7 @@ public class ShowCustomer extends javax.swing.JPanel {
 
     private void btnDetailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDetailActionPerformed
         if(table.getSelectedRow() == -1){
-            controller.error("please select customer.");
+            controller.error("Please select a row.");
         } else {
             String socialNo = (String) table.getModel().getValueAt(table.getSelectedRow(), 0);
             controller.btnDetailOnShowCustomer(socialNo, customers, this);

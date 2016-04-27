@@ -29,6 +29,7 @@ public class Home extends javax.swing.JPanel {
 
         emptyPanel.setBackground(new java.awt.Color(255, 255, 255));
 
+        btnAddCustomer.setBackground(new java.awt.Color(255, 204, 0));
         btnAddCustomer.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         btnAddCustomer.setText("Add New Customer");
         btnAddCustomer.addActionListener(new java.awt.event.ActionListener() {
@@ -37,6 +38,7 @@ public class Home extends javax.swing.JPanel {
             }
         });
 
+        btnShowCustomer.setBackground(new java.awt.Color(255, 204, 0));
         btnShowCustomer.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         btnShowCustomer.setText("Show Customer");
         btnShowCustomer.addActionListener(new java.awt.event.ActionListener() {
@@ -45,6 +47,7 @@ public class Home extends javax.swing.JPanel {
             }
         });
 
+        btnShowRoom.setBackground(new java.awt.Color(255, 204, 0));
         btnShowRoom.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         btnShowRoom.setText("Show Room");
         btnShowRoom.addActionListener(new java.awt.event.ActionListener() {
@@ -53,6 +56,7 @@ public class Home extends javax.swing.JPanel {
             }
         });
 
+        btnShowRest.setBackground(new java.awt.Color(255, 204, 0));
         btnShowRest.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         btnShowRest.setText("Show Rest");
         btnShowRest.addActionListener(new java.awt.event.ActionListener() {
@@ -61,6 +65,7 @@ public class Home extends javax.swing.JPanel {
             }
         });
 
+        btnEditProfile.setBackground(new java.awt.Color(255, 204, 0));
         btnEditProfile.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         btnEditProfile.setText("Edit Profile");
         btnEditProfile.addActionListener(new java.awt.event.ActionListener() {
@@ -69,6 +74,7 @@ public class Home extends javax.swing.JPanel {
             }
         });
 
+        btnLogOut.setBackground(new java.awt.Color(255, 204, 0));
         btnLogOut.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         btnLogOut.setText("Log Out");
         btnLogOut.addActionListener(new java.awt.event.ActionListener() {
@@ -114,35 +120,35 @@ public class Home extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(emptyPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(emptyPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(167, Short.MAX_VALUE)
+                .addContainerGap(116, Short.MAX_VALUE)
                 .addComponent(emptyPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addGap(64, 64, 64))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnShowRoomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnShowRoomActionPerformed
-        // TODO add your handling code here:
+        controller.btnShowRoomOnHome();
     }//GEN-LAST:event_btnShowRoomActionPerformed
 
     private void btnAddCustomerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddCustomerActionPerformed
-        // TODO add your handling code here:
+        controller.btnAddCustomerOnHome();
     }//GEN-LAST:event_btnAddCustomerActionPerformed
 
     private void btnShowCustomerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnShowCustomerActionPerformed
-        // TODO add your handling code here:
+        controller.btnShowCustomerOnHome();
     }//GEN-LAST:event_btnShowCustomerActionPerformed
 
     private void btnShowRestActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnShowRestActionPerformed
-        // TODO add your handling code here:
+        controller.btnShowRestOnHome();
     }//GEN-LAST:event_btnShowRestActionPerformed
 
     private void btnEditProfileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditProfileActionPerformed
-        // TODO add your handling code here:
+        controller.btnEditProfileOnHome();
     }//GEN-LAST:event_btnEditProfileActionPerformed
 
     private void btnLogOutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogOutActionPerformed

@@ -77,7 +77,6 @@ public class ShowReservedAndCheckedIn extends javax.swing.JPanel {
             }
         });
         table.setAutoscrolls(false);
-        table.setColumnSelectionAllowed(true);
         table.getTableHeader().setReorderingAllowed(false);
         scrollPaneForTable.setViewportView(table);
         table.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
@@ -126,12 +125,10 @@ public class ShowReservedAndCheckedIn extends javax.swing.JPanel {
         emptyPanelLayout.setHorizontalGroup(
             emptyPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(emptyPanelLayout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(emptyPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(scrollPaneForTable, javax.swing.GroupLayout.DEFAULT_SIZE, 786, Short.MAX_VALUE)
                     .addGroup(emptyPanelLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(scrollPaneForTable, javax.swing.GroupLayout.DEFAULT_SIZE, 786, Short.MAX_VALUE))
-                    .addGroup(emptyPanelLayout.createSequentialGroup()
-                        .addContainerGap()
                         .addComponent(btnDetail)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -197,6 +194,12 @@ public class ShowReservedAndCheckedIn extends javax.swing.JPanel {
     }//GEN-LAST:event_btnSearchActionPerformed
 
     private void btnDetailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDetailActionPerformed
+        if (table.getSelectedRow() == -1) {
+            controller.error("Please select a row.");
+        } else {
+            String socialNo = (String) table.getModel().getValueAt(table.getSelectedRow(), 0);
+            controller.btnDetailOnShowReservedAndCheckedIn(socialNo, this);
+        }
 
     }//GEN-LAST:event_btnDetailActionPerformed
 
@@ -207,8 +210,11 @@ public class ShowReservedAndCheckedIn extends javax.swing.JPanel {
     private void cbtnDateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbtnDateActionPerformed
         if (cbtnDate.isSelected()) {
             calendarDate.setEnabled(true);
+            calendarDate.setFocusable(true);
         } else {
             calendarDate.setEnabled(false);
+            calendarDate.hidePopup();
+            calendarDate.setFocusable(false);
         }
     }//GEN-LAST:event_cbtnDateActionPerformed
 
